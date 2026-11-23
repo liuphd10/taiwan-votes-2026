@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Taiwan Votes 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=Noto+Sans+TC:wght@400;700&display=swap">
+<style>
+/* Layout: a long-scroll field guide in four chapters, with a ballot-stamp red as the single bold mark. */
+:root {
+  --paper: #F3F5F6;
+  --panel: #FFFFFF;
+  --ink: #17212F;
+  --soft: #46525F;
+  --line: #D5DAE0;
+  --stamp: #C4302B;
+  --stamp-soft: #FBE9E7;
+  --night: #142033;
+  --night-fg: #E9EEF4;
+  --night-soft: #B9C5D3;
+  --kmt: #1F5AA6;
+  --dpp: #2D7A3A;
+  --tpp: #17767D;
+  --ind: #5B636E;
+  --display: 'Barlow Condensed', 'Noto Sans TC', 'Arial Narrow', Arial, sans-serif;
+  --text: 'Source Sans 3', 'Noto Sans TC', 'Segoe UI', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #10161F; --panel: #19222E; --ink: #E8EDF3; --soft: #AEB9C6; --line: #2C3846;
+    --stamp: #F06A5F; --stamp-soft: #3A1F1E; --night: #0B111A; --night-fg: #E9EEF4; --night-soft: #B9C5D3;
+    --kmt: #6FA3E8; --dpp: #6FC07C; --tpp: #5EC2C9; --ind: #A3ABB5;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10161F; --panel: #19222E; --ink: #E8EDF3; --soft: #AEB9C6; --line: #2C3846;
+  --stamp: #F06A5F; --stamp-soft: #3A1F1E; --night: #0B111A; --night-fg: #E9EEF4; --night-soft: #B9C5D3;
+  --kmt: #6FA3E8; --dpp: #6FC07C; --tpp: #5EC2C9; --ind: #A3ABB5;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--night); }
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--display); line-height: 1.05; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700; }
+h3 { font-size: 1.6rem; font-weight: 600; }
+p { margin: 0; }
+.eyebrow { font-family: var(--text); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stamp); }
+.lede { font-size: 1.25rem; color: var(--soft); max-width: 62ch; }
+.zh { font-family: 'Noto Sans TC', var(--text); }
+a { color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--stamp); outline-offset: 2px; }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figure img { width: 100%; height: auto; border-radius: 6px; display: block; background: var(--panel); }
+figcaption { font-size: 0.85rem; color: var(--soft); }
+
+/* Hero */
+.hero { position: relative; background: var(--night); color: var(--night-fg); overflow: hidden; }
+.hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; max-width: none; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,22,36,0.95) 0%, rgba(14,22,36,0.7) 55%, rgba(14,22,36,0.2) 100%); }
+.hero .wrap { position: relative; z-index: 1; padding-block: 5rem 4rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+.hero h1 { font-size: clamp(3.4rem, 10vw, 6.5rem); font-weight: 700; letter-spacing: 0.01em; }
+.hero .eyebrow { color: #FF9A8F; }
+.hero .lede { color: var(--night-soft); margin-top: 1rem; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 1.75rem; font-weight: 600; color: var(--night-fg); }
+.hero .credit { position: absolute; right: max(16px, env(safe-area-inset-right, 0px)); bottom: 8px; z-index: 1; font-size: 0.75rem; color: #9AA7B8; }
+
+/* The ballot stamp: Taiwan's ballots are marked with a red 卜-shaped stamp in a circle */
+.stamp {
+  width: 150px; height: 150px; border-radius: 50%;
+  border: 6px solid #E2483F; color: #E2483F;
+  display: grid; place-items: center;
+  font-family: 'Noto Sans TC', serif; font-size: 84px; font-weight: 700; line-height: 1;
+  transform: rotate(-12deg); opacity: 0.92;
+}
+.stamp-note { font-size: 0.8rem; color: var(--night-soft); text-align: center; margin-top: 0.75rem; max-width: 170px; }
+
+/* Chapter nav */
+.chapnav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--panel); border-bottom: 1px solid var(--line); }
+.chapnav .wrap { display: flex; gap: 0.25rem; overflow-x: auto; scrollbar-width: none; }
+.chapnav a { flex: none; text-decoration: none; padding: 0.85rem 0.9rem; font-weight: 600; font-size: 0.95rem; color: var(--soft); border-bottom: 3px solid transparent; }
+.chapnav a:hover { color: var(--ink); border-bottom-color: var(--stamp); }
+.chapnav a b { color: var(--stamp); margin-right: 0.35rem; }
+
+/* Sections */
+.chapter { padding-block: 4.5rem 1rem; }
+.chapter-head { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.5rem; }
+.chapter-head .num { font-family: var(--display); font-size: 1.1rem; font-weight: 600; color: var(--stamp); }
+.block { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; padding-block: 2rem; border-top: 1px solid var(--line); }
+.block > * { min-width: 0; }
+.block .text { display: flex; flex-direction: column; gap: 1rem; }
+.block .text p { color: var(--soft); }
+.block .text p b { color: var(--ink); }
+.block.flip figure { order: -1; }
+
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.5rem; }
+.fact .n { font-family: var(--display); font-size: 2.4rem; font-weight: 700; color: var(--stamp); line-height: 1; }
+.fact .l { font-size: 1rem; color: var(--soft); }
+
+.timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.timeline li { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; padding-block: 0.7rem; border-bottom: 1px dashed var(--line); }
+.timeline .yr { font-family: var(--display); font-size: 1.6rem; font-weight: 700; color: var(--stamp); line-height: 1.1; }
+.timeline .ev { color: var(--soft); }
+
+.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.three > div { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.4rem; display: flex; flex-direction: column; gap: 0.6rem; min-width: 0; }
+.three .tag { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--soft); }
+.three p { color: var(--soft); font-size: 1.02rem; }
+.three .kmt .tag { color: var(--kmt); }
+.three .dpp .tag { color: var(--dpp); }
+.three .tpp .tag { color: var(--tpp); }
+.three .kmt { border-top: 5px solid var(--kmt); }
+.three .dpp { border-top: 5px solid var(--dpp); }
+.three .tpp { border-top: 5px solid var(--tpp); }
+
+.band { background: var(--night); color: var(--night-fg); margin-block: 2.5rem; }
+.band .wrap { padding-block: 3.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.band h2 { max-width: 22ch; }
+.band p { color: var(--night-soft); max-width: 62ch; font-size: 1.2rem; }
+.band .eyebrow { color: #FF9A8F; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.2rem; }
+.stat .n { font-family: var(--display); font-size: 2.6rem; font-weight: 700; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.stat .l { font-size: 0.98rem; color: var(--soft); margin-top: 0.4rem; }
+
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 1rem; }
+th, td { text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+th { font-family: var(--display); font-size: 1.15rem; font-weight: 600; letter-spacing: 0.02em; }
+td:first-child { font-weight: 600; }
+.th-kmt { color: var(--kmt); } .th-dpp { color: var(--dpp); }
+.note { font-size: 0.9rem; color: var(--soft); margin-top: 0.75rem; }
+
+.quote { border-left: 4px solid var(--stamp); padding: 0.25rem 0 0.25rem 1.1rem; font-size: 1.3rem; color: var(--ink); font-weight: 600; }
+
+.checklist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+.checklist li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.75rem; color: var(--soft); }
+.checklist li::before { content: "✓"; display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; border: 2px solid var(--stamp); color: var(--stamp); font-weight: 700; font-size: 0.9rem; }
+.checklist b { color: var(--ink); }
+
+/* Voter checker */
+.checker { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.checker > * { min-width: 0; }
+.checker form { display: flex; flex-direction: column; gap: 0.9rem; }
+.checker label { display: flex; flex-direction: column; gap: 0.3rem; font-weight: 600; font-size: 0.98rem; }
+.checker input[type="number"], .checker select { font: inherit; padding: 0.5rem 0.6rem; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); color: var(--ink); max-width: 100%; }
+.checker .row { display: flex; gap: 0.6rem; align-items: center; font-weight: 600; font-size: 0.98rem; }
+.checker .row input { width: 1.2rem; height: 1.2rem; accent-color: var(--stamp); }
+.verdict { border-radius: 8px; padding: 1.25rem; background: var(--paper); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 0.6rem; }
+.verdict .big { font-family: var(--display); font-size: 1.9rem; font-weight: 700; line-height: 1.1; }
+.verdict.ok .big { color: var(--dpp); }
+.verdict.no .big { color: var(--stamp); }
+.verdict ul { margin: 0; padding-left: 1.2rem; color: var(--soft); }
+
+/* For you */
+.you { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+.you > div { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; min-width: 0; }
+.you .k { font-family: var(--display); font-size: 1rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--stamp); }
+.you p { color: var(--soft); }
+.parents { background: var(--stamp-soft); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.parents p { color: var(--ink); }
+.questions { counter-reset: q; list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.questions li { counter-increment: q; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.1rem 1.2rem 1.1rem 3.4rem; position: relative; color: var(--ink); min-width: 0; }
+.questions li::before { content: counter(q); position: absolute; left: 1.1rem; top: 0.9rem; font-family: var(--display); font-size: 1.7rem; font-weight: 700; color: var(--stamp); }
+
+footer { border-top: 1px solid var(--line); margin-top: 4rem; }
+footer .wrap { padding-block: 2.5rem 3rem; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem; color: var(--soft); }
+footer ul { margin: 0; padding-left: 1.2rem; }
+
+@media (max-width: 820px) {
+  .hero .wrap { grid-template-columns: 1fr; padding-block: 3.5rem 3rem; }
+  .stamp-wrap { display: none; }
+  .block, .checker, .you, .questions { grid-template-columns: 1fr; }
+  .block.flip figure { order: 0; }
+  .three { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 420px) {
+  .facts, .stats { grid-template-columns: 1fr; }
+}
+</style>
+
+<header class="hero">
+  <img class="bg" src="img/skyline.jpg" alt="">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Saturday, November 28, 2026 · <span class="zh">九合一選舉</span></p>
+      <h1>Taiwan Votes</h1>
+      <p class="lede">A guide for Taiwanese American kids: Taiwan’s 2026 local elections, why family members fly home to vote, and what it all means for you.</p>
+      <div class="meta"><span>22 mayors and county leaders</span><span>19.65 million voters</span><span>Polls open 8 AM to 4 PM</span></div>
+    </div>
+    <div class="stamp-wrap" aria-hidden="true">
+      <div class="stamp">卜</div>
+      <p class="stamp-note">Voters in Taiwan mark ballots with a red stamp like this</p>
+    </div>
+  </div>
+  <p class="credit">Photo: Taipei skyline · Wikimedia Commons, CC BY 2.0</p>
+</header>
+
+<nav class="chapnav" aria-label="Chapters">
+  <div class="wrap">
+    <a href="#story"><b>1</b>Taiwan’s story</a>
+    <a href="#vote"><b>2</b>The 2026 vote</a>
+    <a href="#home"><b>3</b>Flying home</a>
+    <a href="#you"><b>4</b>What it means for you</a>
+  </div>
+</nav>
+
+<main>
+<!-- CHAPTER 1 -->
+<section id="story" class="chapter wrap">
+  <div class="chapter-head">
+    <p class="num">Chapter 1</p>
+    <h2>How Taiwan got here</h2>
+    <p class="lede">You can’t understand this election without a little history, starting in 1949.</p>
+  </div>
+
+  <div class="block">
+    <div class="text">
+      <p class="eyebrow">Where is Taiwan?</p>
+      <h3>An island about 100 miles off China’s coast</h3>
+      <div class="facts">
+        <div class="fact"><p class="n">23 million</p><p class="l">people, about as many as Florida</p></div>
+        <div class="fact"><p class="n">~100 mi</p><p class="l">across the Taiwan Strait to China</p></div>
+        <div class="fact"><p class="n">~13 hrs</p><p class="l">flight from California</p></div>
+        <div class="fact"><p class="n">22</p><p class="l">cities and counties</p></div>
+      </div>
+    </div>
+    <figure>
+      <img src="img/asia.png" alt="Map of Asia with Taiwan highlighted in red off the southeast coast of China" loading="lazy">
+      <figcaption>Taiwan (red) in Asia · Wikimedia Commons, CC BY-SA 3.0</figcaption>
+    </figure>
+  </div>
+
+  <div class="block flip">
+    <div class="text">
+      <p class="eyebrow">1949</p>
+      <h3>A civil war splits China in two</h3>
+      <p>After World War II, the <b>Nationalists</b> (KMT, <span class="zh">國民黨</span>) and the <b>Communists</b> fought over who would rule China. In 1949 the Communists won the mainland and founded the <b>People’s Republic of China</b> in Beijing.</p>
+      <p>The Nationalist government, the <b>Republic of China</b>, moved to Taiwan with about 1 to 2 million soldiers and families. Both governments still exist today, and that is the root of the tension.</p>
+    </div>
+    <figure>
+      <img src="img/ship1949.jpg" alt="Black and white photo of crowds of Nationalist soldiers boarding a ship bound for Taiwan in 1949" loading="lazy">
+      <figcaption>Soldiers board a ship bound for Taiwan, 1949 · Wikimedia Commons, public domain</figcaption>
+    </figure>
+  </div>
+
+  <div class="block">
+    <div class="text">
+      <p class="eyebrow">1949 – 1987 · Martial law <span class="zh">戒嚴</span></p>
+      <h3>38 years without free elections</h3>
+      <p>Under martial law, the army and police had special power over daily life. New parties were banned, newspapers were controlled, and people could be jailed for criticizing the government.</p>
+      <p>On <b>July 15, 1987</b>, martial law ended. The TV news card shown here announced it the night before: “President Chiang orders martial law lifted at midnight.”</p>
+    </div>
+    <figure>
+      <img src="img/martiallaw.jpg" alt="1987 Taiwanese TV news card in Chinese announcing martial law will be lifted at midnight" loading="lazy">
+      <figcaption>CTV news card, July 14, 1987 · Wikimedia Commons, public domain</figcaption>
+    </figure>
+  </div>
+
+  <div class="block flip">
+    <div class="text">
+      <p class="eyebrow">1986 – today</p>
+      <h3>Taiwan becomes a democracy</h3>
+      <ol class="timeline">
+        <li><span class="yr">1986</span><span class="ev">Activists form the DPP, the first real opposition party.</span></li>
+        <li><span class="yr">1987</span><span class="ev">Martial law ends. People can protest and start newspapers.</span></li>
+        <li><span class="yr">1996</span><span class="ev">Voters choose their president directly for the first time. China fires test missiles nearby, and the US sends aircraft carriers.</span></li>
+        <li><span class="yr">2000</span><span class="ev">Power passes peacefully from one party to another.</span></li>
+        <li><span class="yr">Today</span><span class="ev">Power has changed hands peacefully three times.</span></li>
+      </ol>
+    </div>
+    <figure>
+      <img src="img/liberty.jpg" alt="Liberty Square in Taipei with its large white gate" loading="lazy">
+      <figcaption>Liberty Square <span class="zh">自由廣場</span>, Taipei, site of many democracy protests · Wikimedia Commons, CC BY-SA 4.0</figcaption>
+    </figure>
+  </div>
+
+  <div class="block" style="grid-template-columns:1fr">
+    <div class="text">
+      <p class="eyebrow">Taiwan, China and the United States</p>
+      <h3>Three sides, three different views</h3>
+    </div>
+    <div class="three">
+      <div><p class="tag">China (PRC)</p><h3>“Taiwan is part of China”</h3><p>Beijing has never ruled Taiwan but says it must one day be joined to China. It has not ruled out using force, and its military often holds drills around the island.</p></div>
+      <div><p class="tag">Taiwan (ROC)</p><h3>“We govern ourselves”</h3><p>Taiwan has its own president, army, money, passports and elections. Most people want to keep their way of life. They disagree on how close to be with China.</p></div>
+      <div><p class="tag">United States</p><h3>“Keep the peace”</h3><p>Since 1979 the US officially recognizes Beijing, not Taipei. Under the <b>Taiwan Relations Act</b> it sells Taiwan weapons for defense and keeps close unofficial ties.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <p class="eyebrow">Why the world watches</p>
+    <h2>The chips inside your phone, laptop and game console were very likely made in Taiwan.</h2>
+    <p>Taiwan makes most of the world’s most advanced computer chips. So what happens there, including who leads its cities, matters to people everywhere.</p>
+  </div>
+</div>
+
+<!-- CHAPTER 2 -->
+<section id="vote" class="chapter wrap">
+  <div class="chapter-head">
+    <p class="num">Chapter 2</p>
+    <h2>The 2026 election</h2>
+    <p class="lede">Taiwanese call it “nine-in-one” (<span class="zh">九合一</span>) because nine kinds of local leaders are chosen on one day.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><p class="n">22</p><p class="l">mayors and county magistrates <span class="zh">縣市長</span></p></div>
+    <div class="stat"><p class="n">11,051</p><p class="l">local jobs in total, down to village chiefs <span class="zh">里長</span></p></div>
+    <div class="stat"><p class="n">19.65M</p><p class="l">people allowed to vote</p></div>
+    <div class="stat"><p class="n">18,244</p><p class="l">polling stations</p></div>
+  </div>
+  <p class="note">Figures: Central Election Commission, as reported by Taiwanese media, Nov. 2026. Winners take office December 25 for four-year terms.</p>
+
+  <div class="block" style="grid-template-columns:1fr;margin-top:2rem">
+    <div class="text"><p class="eyebrow">Compare</p><h3>Voting in the US vs. voting in Taiwan</h3></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:24%"></th><th>United States</th><th>Taiwan</th></tr></thead>
+        <tbody>
+          <tr><td>Local leaders</td><td>Mayors and governors, on different dates</td><td>All 22 city and county leaders on the same day</td></tr>
+          <tr><td>Voting age</td><td>18</td><td>20 for local leaders, 18 for referendums</td></tr>
+          <tr><td>Election day</td><td>A Tuesday, usually a school and work day</td><td>A Saturday, and a public holiday</td></tr>
+          <tr><td>Marking the ballot</td><td>Fill in a bubble or touch a screen</td><td>Press an official red ink stamp (<span class="zh">圈選章</span>) on paper</td></tr>
+          <tr><td>Vote by mail?</td><td>Yes</td><td><b>No.</b> You must vote in person, in your home district</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="text">
+      <p class="eyebrow">The map</p>
+      <h3>22 cities and counties</h3>
+      <p>Six are giant cities called <b>special municipalities</b> (<span class="zh">直轄市</span>, in bold on the map). Almost 7 in 10 people in Taiwan live in one of them: <b>Taipei, New Taipei and Taoyuan</b> in the north, <b>Taichung</b> in the middle, and <b>Tainan and Kaohsiung</b> in the south.</p>
+      <p>The other 16 include small islands close to China, like Kinmen and Matsu (Lienchiang). Try finding your family’s hometown on the map.</p>
+    </div>
+    <figure>
+      <img src="img/divisions.png" alt="Map of Taiwan’s 22 cities and counties, special municipalities in bold" loading="lazy" style="max-height:640px;object-fit:contain">
+      <figcaption>Wikimedia Commons, CC BY-SA 3.0. Taoyuan is now a city, not a county.</figcaption>
+    </figure>
+  </div>
+
+  <div class="block" style="grid-template-columns:1fr">
+    <div class="text"><p class="eyebrow">The main parties</p><h3>Blue, green and white</h3></div>
+    <div class="three">
+      <div class="kmt"><p class="tag">Blue · KMT <span class="zh">國民黨</span></p><h3>Kuomintang</h3><p>The oldest party. It came from China in 1949 and ruled Taiwan alone until 2000. It favors talking and trading with China to keep the peace, and opposes Taiwan independence.</p></div>
+      <div class="dpp"><p class="tag">Green · DPP <span class="zh">民進黨</span></p><h3>Democratic Progressive Party</h3><p>Born in 1986 from the democracy movement. It stresses that Taiwan is separate from the PRC and works closely with the US and Japan. President Lai Ching-te (<span class="zh">賴清德</span>) is DPP.</p></div>
+      <div class="tpp"><p class="tag">White · TPP <span class="zh">民眾黨</span></p><h3>Taiwan People’s Party</h3><p>Founded in 2019. It calls itself a practical middle choice between blue and green. In 2026 it is teaming up with the KMT in several races.</p></div>
+    </div>
+  </div>
+
+  <div class="block flip">
+    <div class="text">
+      <p class="eyebrow">Last time: 2022</p>
+      <h3>A blue north, a green south</h3>
+      <div class="facts">
+        <div class="fact"><p class="n" style="color:var(--kmt)">14</p><p class="l">won by the KMT (blue)</p></div>
+        <div class="fact"><p class="n" style="color:var(--dpp)">5</p><p class="l">won by the DPP (green)</p></div>
+        <div class="fact"><p class="n" style="color:var(--tpp)">1</p><p class="l">won by the TPP (Hsinchu City)</p></div>
+        <div class="fact"><p class="n" style="color:var(--ind)">2</p><p class="l">won by independents (gray)</p></div>
+      </div>
+      <p>The DPP has won the <b>presidency</b> three times in a row, but the KMT wins most <b>local</b> races. Many voters pick different parties for different jobs.</p>
+    </div>
+    <figure>
+      <img src="img/result2022.png" alt="Map of 2022 results: KMT blue across the north, center and east, DPP green in the south-west" loading="lazy" style="max-height:640px;object-fit:contain">
+      <figcaption>2022 mayor and magistrate results · Wikimedia Commons, CC BY-SA 4.0</figcaption>
+    </figure>
+  </div>
+
+  <div class="block" style="grid-template-columns:1fr">
+    <div class="text"><p class="eyebrow">2026 · The six biggest races</p><h3>Who is running for mayor?</h3></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:22%">City</th><th class="th-kmt">KMT (blue)</th><th class="th-dpp">DPP (green)</th></tr></thead>
+        <tbody>
+          <tr><td>Taipei <span class="zh">台北</span></td><td>Chiang Wan-an <span class="zh">蔣萬安</span> (mayor now)</td><td>Puma Shen <span class="zh">沈伯洋</span></td></tr>
+          <tr><td>New Taipei <span class="zh">新北</span></td><td>Lee Shu-chuan <span class="zh">李四川</span> (TPP backs him)</td><td>Su Chiao-hui <span class="zh">蘇巧慧</span></td></tr>
+          <tr><td>Taoyuan <span class="zh">桃園</span></td><td>Chang San-cheng <span class="zh">張善政</span> (mayor now)</td><td>Huang Shih-chieh <span class="zh">黃世杰</span></td></tr>
+          <tr><td>Taichung <span class="zh">台中</span></td><td>Johnny Chiang <span class="zh">江啟臣</span></td><td>Ho Hsin-chun <span class="zh">何欣純</span></td></tr>
+          <tr><td>Tainan <span class="zh">台南</span></td><td>Hsieh Lung-chieh <span class="zh">謝龍介</span></td><td>Chen Ting-fei <span class="zh">陳亭妃</span></td></tr>
+          <tr><td>Kaohsiung <span class="zh">高雄</span></td><td>Ko Chih-en <span class="zh">柯志恩</span></td><td>Lai Jui-lung <span class="zh">賴瑞隆</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Smaller parties and independents are also on the ballot. Check the Central Election Commission’s official list for every candidate.</p>
+  </div>
+
+  <div class="block">
+    <div class="text">
+      <p class="eyebrow">Also on the ballot · Referendum Case 22 <span class="zh">公投第22案</span></p>
+      <h3>A yes-or-no question about nuclear power</h3>
+      <p class="quote">“Do you support the government using nuclear power to boost the economy, ending the ‘nuclear-free homeland’ energy policy?”</p>
+      <p>Voters mark <b>Agree</b> (<span class="zh">同意</span>) or <b>Disagree</b> (<span class="zh">不同意</span>).</p>
+    </div>
+    <div class="text">
+      <p><b>Background:</b> Taiwan switched off its last nuclear reactor in May 2025. Some people want nuclear power back because it is cheap and low-carbon. Others worry about earthquakes and nuclear waste.</p>
+      <p><b>To pass:</b> more yes than no votes, and the yes votes must equal at least one quarter of all eligible voters.</p>
+    </div>
+  </div>
+
+  <div class="block flip">
+    <div class="text">
+      <p class="eyebrow">Why Beijing and Washington are watching</p>
+      <h3>A local vote with a big audience</h3>
+      <ul class="checklist">
+        <li><span><b>A warm-up for 2028.</b> The next presidential election is in 2028. Winning big cities now helps a party then.</span></li>
+        <li><span><b>A signal about China.</b> Parties differ on how close to be with Beijing, so results are read around the world.</span></li>
+        <li><span><b>Fake news and meddling.</b> By September 2026, investigators had opened 54 cases of suspected foreign interference or election fraud.</span></li>
+      </ul>
+    </div>
+    <figure>
+      <img src="img/presoffice.jpg" alt="The red-brick Presidential Office Building in Taipei" loading="lazy">
+      <figcaption>Presidential Office Building, Taipei · Wikimedia Commons, CC BY-SA 3.0</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <p class="eyebrow">Taiwanese living overseas</p>
+    <h2>No mail-in ballots. No voting at the embassy. To vote, you have to be there.</h2>
+    <p>Americans living abroad can mail in their ballots. Taiwan has no absentee voting, so Taiwanese citizens in the US must fly home and vote in person at their own neighborhood polling station.</p>
+  </div>
+</div>
+
+<!-- CHAPTER 3 -->
+<section id="home" class="chapter wrap">
+  <div class="chapter-head">
+    <p class="num">Chapter 3</p>
+    <h2>Flying home to vote</h2>
+    <p class="lede">Many Taiwanese in America spend a lot of money and time to cast one ballot. Here is how it works, and why they do it.</p>
+  </div>
+
+  <div class="block">
+    <div class="text">
+      <p class="eyebrow">The rules</p>
+      <h3>Before you board the plane</h3>
+      <ul class="checklist">
+        <li><span><b>Household registration (<span class="zh">戶籍</span>) must still be active.</b> Living abroad 2+ years without a trip home can get it removed.</span></li>
+        <li><span><b>4 months:</b> you must have been registered in that city or county for at least 4 months.</span></li>
+        <li><span><b>Age 20+</b> for local races, <b>18+</b> for the referendum.</span></li>
+        <li><span><b>Bring your ID card (<span class="zh">身分證</span>).</b> A passport is not accepted. A personal seal is optional, and it must never touch the ballot.</span></li>
+      </ul>
+    </div>
+    <figure>
+      <img src="img/polling.jpg" alt="Voters at a polling station inside a Taipei community center, with a police officer at a desk" loading="lazy">
+      <figcaption>Polling station in Songshan District, Taipei · Wikimedia Commons, CC0</figcaption>
+    </figure>
+  </div>
+
+  <div class="block" style="grid-template-columns:1fr">
+    <div class="text">
+      <p class="eyebrow">Try it</p>
+      <h3>Could this person vote on November 28?</h3>
+      <p>Change the answers for a made-up voter, or for someone in your family, and see what happens.</p>
+    </div>
+    <div class="checker">
+      <form id="checker-form" novalidate>
+        <label for="age">Age on election day
+          <input id="age" type="number" min="0" max="120" value="45" inputmode="numeric">
+        </label>
+        <label for="reg">Household registration in Taiwan
+          <select id="reg">
+            <option value="active" selected>Still active</option>
+            <option value="removed">Removed (away 2+ years)</option>
+            <option value="never">Never had one</option>
+          </select>
+        </label>
+        <label for="months">Months registered in that city or county
+          <input id="months" type="number" min="0" max="1200" value="120" inputmode="numeric">
+        </label>
+        <div class="row"><input id="idcard" type="checkbox" checked><label for="idcard" style="flex-direction:row">Brings the Taiwan ID card <span class="zh">身分證</span></label></div>
+        <div class="row"><input id="there" type="checkbox" checked><label for="there" style="flex-direction:row">Is in Taiwan on November 28</label></div>
+      </form>
+      <div id="verdict" class="verdict ok" aria-live="polite">
+        <p class="big">Can vote for mayor and in the referendum</p>
+        <ul><li>All the rules are met.</li></ul>
+      </div>
+    </div>
+    <p class="note">A simplified teaching tool based on the rules above. The referendum also needs 6+ months living in Taiwan, which this checker treats as the same as an active registration.</p>
+  </div>
+
+  <div class="block flip">
+    <div class="text">
+      <p class="eyebrow">The journey <span class="zh">返鄉投票</span></p>
+      <h3>13 hours in the air for one ballot</h3>
+      <ol class="timeline">
+        <li><span class="yr">Fri</span><span class="ev">Land by <b>Friday, Nov. 27</b>. Flying west you cross the date line and lose a day.</span></li>
+        <li><span class="yr">Night</span><span class="ev">Taiwan’s high-speed rail added extra trains, even overnight ones, so voters can reach their hometowns.</span></li>
+        <li><span class="yr">Sat</span><span class="ev">Vote between 8 AM and 4 PM. Counting starts right after, in the same room, open to the public.</span></li>
+        <li><span class="yr">Cost</span><span class="ev">A round trip can cost over $1,000, plus time off work and school.</span></li>
+      </ol>
+    </div>
+    <figure>
+      <img src="img/airport.jpg" alt="Departure hall of Taiwan Taoyuan International Airport Terminal 1" loading="lazy">
+      <figcaption>Taoyuan International Airport, Terminal 1 · Wikimedia Commons, CC BY-SA 2.0</figcaption>
+    </figure>
+  </div>
+
+  <div class="block" style="grid-template-columns:1fr">
+    <div class="text"><p class="eyebrow">Why it matters</p><h3>Why fly across the ocean to vote?</h3></div>
+    <div class="three">
+      <div><p class="tag">Close races</p><h3>3,254 votes</h3><p>In 2018, Taipei’s mayor won by just 3,254 votes out of about 1.4 million. That is fewer people than fit in a small sports arena.</p></div>
+      <div><p class="tag">A hard-won right</p><h3>Only since 1987</h3><p>Your grandparents’ generation grew up without free elections. Voting honors the people who fought for this right.</p></div>
+      <div><p class="tag">A message to the world</p><h3>“We decide”</h3><p>When people travel thousands of miles to vote, it shows that Taiwan’s future is chosen by its own people, peacefully.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 4 -->
+<section id="you" class="chapter wrap">
+  <div class="chapter-head">
+    <p class="num">Chapter 4</p>
+    <h2>What does this mean for you, as a Taiwanese American?</h2>
+    <p class="lede">You live in the US and you can’t vote in Taiwan yet. This election still touches your life in more ways than you might think.</p>
+  </div>
+
+  <div class="you">
+    <div>
+      <p class="k">Your family story</p>
+      <h3>This history is your history</h3>
+      <p>Many Taiwanese families came to America in the 1960s to 1990s, some during martial law. Your parents or grandparents may remember a Taiwan with no free elections, or the first time they voted for a president. Their choices are part of why you grew up here.</p>
+    </div>
+    <div>
+      <p class="k">Your citizenship</p>
+      <h3>You may be Taiwanese too</h3>
+      <p>If one of your parents is a Taiwanese citizen, you may also count as one under Taiwan’s law. Someday you could get a Taiwan passport, register a household there, and vote when you are 20. Ask your parents what your status is.</p>
+    </div>
+    <div>
+      <p class="k">Your American vote</p>
+      <h3>At 18, your voice reaches Taiwan</h3>
+      <p>The US Congress decides things like the Taiwan Relations Act and weapons sales. When you turn 18, the people you vote for in America help shape how the US treats Taiwan. You can write to your representatives even before then.</p>
+    </div>
+    <div>
+      <p class="k">Your devices and the economy</p>
+      <h3>Peace in Taiwan keeps your world running</h3>
+      <p>If there were a crisis in the Taiwan Strait, chips could run short, and phones, game consoles and cars could get more expensive or hard to find. A calm, stable Taiwan matters to every American family.</p>
+    </div>
+    <div>
+      <p class="k">Your superpower: two languages, two cultures</p>
+      <h3>You can explain Taiwan to your friends</h3>
+      <p>Most of your classmates don’t know where Taiwan is or why it matters. You can. Taiwanese American Heritage Week is celebrated each May, which is a great time to share what you learned.</p>
+    </div>
+    <div>
+      <p class="k">Your job this week</p>
+      <h3>Be a fake-news detective</h3>
+      <p>During elections, false stories spread fast in family chat groups like LINE. If a grandparent forwards something shocking, help them check it: who posted it, is it on a real news site, is the photo old?</p>
+    </div>
+  </div>
+
+  <div class="parents" style="margin-top:1.5rem">
+    <p class="eyebrow">A note for parents</p>
+    <p>A child with ROC nationality who later registers a household in Taiwan takes on the duties that come with it. For boys, that can include military service. Before registering a child, check the current rules with the nearest Taipei Economic and Cultural Office (TECO).</p>
+  </div>
+
+  <div class="block" style="grid-template-columns:1fr;margin-top:2.5rem">
+    <div class="text"><p class="eyebrow">Talk with your family</p><h3>Questions to ask at dinner</h3></div>
+    <ol class="questions">
+      <li>Did you or our grandparents ever vote in Taiwan? What was it like?</li>
+      <li>What do you remember about martial law, or the first presidential election in 1996?</li>
+      <li>Am I a Taiwanese citizen too? Could I vote there one day?</li>
+      <li>Why do you think Taiwan doesn’t allow voting by mail? What are the good and bad sides?</li>
+      <li>If you were mayor of our family’s hometown, what would you fix first?</li>
+      <li>Would you fly 13 hours to vote? Why or why not?</li>
+    </ol>
+  </div>
+
+  <div class="block">
+    <div class="text">
+      <p class="eyebrow">Fun fact</p>
+      <h3>The 30-meter line</h3>
+      <p>Police put up signs like this one 30 meters (about 100 feet) from every polling station. Inside that line, nobody is allowed to campaign or tell people how to vote. Breaking the rule can mean a fine or even jail.</p>
+    </div>
+    <figure>
+      <img src="img/pollsign.jpg" alt="Yellow and black police sign in Chinese marking the 30-meter line around a polling station" loading="lazy">
+      <figcaption>“Polling station 30-meter line” sign, Keelung, 2019 · Wikimedia Commons, CC BY-SA 4.0</figcaption>
+    </figure>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Sources.</b> Election figures, rules and candidates come from news reports in Sept.–Nov. 2026 and the Central Election Commission figures they cite. Check the commission’s official candidate list before relying on any name.</p>
+    <ul>
+      <li><a href="https://focustaiwan.tw/politics/202609075001">Focus Taiwan: 2026 county and city head candidates</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/2026_Taiwanese_local_elections">Wikipedia: 2026 Taiwanese local elections</a></li>
+      <li><a href="https://www.managertoday.com.tw/articles/view/72722">經理人: 2026 九合一選舉懶人包</a></li>
+      <li><a href="https://www.worldjournal.com/wj/story/121617/9868939">世界日報: 旅美台灣人返台投票須知</a></li>
+      <li><a href="https://www.taipeitimes.com/News/taiwan/archives/2026/11/24/2003868281">Taipei Times: final election push</a></li>
+    </ul>
+    <p>Photos and maps: Wikimedia Commons, under the licenses shown in each caption.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('checker-form');
+  var out = document.getElementById('verdict');
+  function num(id) { var v = parseInt(document.getElementById(id).value, 10); return isNaN(v) ? 0 : v; }
+  function update() {
+    var age = num('age');
+    var months = num('months');
+    var reg = document.getElementById('reg').value;
+    var id = document.getElementById('idcard').checked;
+    var there = document.getElementById('there').checked;
+    var problems = [];
+    if (!there) problems.push('Taiwan has no mail-in or overseas voting, so they must be in Taiwan.');
+    if (reg === 'removed') problems.push('Their household registration was removed. Re-registering now is too late for this election.');
+    if (reg === 'never') problems.push('They need a household registration (戶籍) in Taiwan to vote.');
+    if (!id) problems.push('They need their Taiwan ID card. A passport does not work.');
+    var regOk = reg === 'active';
+    var mayorOk = problems.length === 0 && age >= 20 && months >= 4;
+    var refOk = problems.length === 0 && age >= 18;
+    if (problems.length === 0 && age < 18) problems.push('They are under 18, too young for any ballot.');
+    else if (problems.length === 0 && age < 20) problems.push('At ' + age + ' they are too young for local races (20+), but old enough for the referendum (18+).');
+    if (regOk && problems.length === 0 && months < 4 && age >= 20) problems.push('They have been registered there only ' + months + ' month' + (months === 1 ? '' : 's') + '. Local races need 4.');
+    var big, cls;
+    if (mayorOk && refOk) { big = 'Can vote for mayor and in the referendum'; cls = 'ok'; }
+    else if (refOk) { big = 'Can vote in the referendum only'; cls = 'ok'; }
+    else { big = 'Cannot vote this time'; cls = 'no'; }
+    out.className = 'verdict ' + cls;
+    var html = '<p class="big">' + big + '</p><ul>';
+    if (problems.length === 0) html += '<li>All the rules are met.</li>';
+    problems.forEach(function (p) { html += '<li>' + p.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</li>'; });
+    out.innerHTML = html + '</ul>';
+  }
+  form.addEventListener('input', update);
+  form.addEventListener('change', update);
+  form.addEventListener('submit', function (e) { e.preventDefault(); });
+  update();
+})();
+</script>
+
+</html>
